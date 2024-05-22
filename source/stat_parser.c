@@ -7,7 +7,7 @@
 
 bool scan_proc_stat(size_t *cpu_num) {
     FILE *proc_stat;
-    if ((proc_stat = fopen("/proc/stat", "r")) == NULL) {
+    if ((proc_stat = fopen("/host/proc/stat", "r")) == NULL) {
         return false;
     }
     rewind(proc_stat);
@@ -43,7 +43,7 @@ bool read_proc_stat(stat_struct_t *stat) {
     tmp[TMP_SIZE - 1] = '\0';
     FILE *proc_stat = NULL;
 
-    if ((proc_stat = fopen("/proc/stat", "r")) == NULL) {
+    if ((proc_stat = fopen("/host/proc/stat", "r")) == NULL) {
         return false;
     }
 
