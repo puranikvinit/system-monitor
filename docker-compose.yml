@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  system-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /proc:/host/proc:ro
