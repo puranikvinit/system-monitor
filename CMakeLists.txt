@@ -16,6 +16,7 @@ link_directories(
 file(GLOB all_SRCS
   "${PROJECT_SOURCE_DIR}/include/*.h"
   "${PROJECT_SOURCE_DIR}/source/*.c"
+  "${PROJECT_SOURCE_DIR}/source/threads/*.c"
   "${PROJECT_SOURCE_DIR}/main.c"
 )
 
