@@ -3,16 +3,31 @@
 #include <stdbool.h>
 #include <unistd.h>
 
+#include "thread_manager.h"
 #include "socket_manager.h"
 #include "monitor_metrics.h"
+#include "accumulator_queue.h"
+
+accumulator_queue_t accumulator_queue = { .front = 0, .rear = 0 };
+
+thread_manager_t thread_manager;
 
 int main() {
-    char accumulated_metrics[100000] = ""; // Will use a file and read from it.
-    socket_manager_t socket_list = open_socket(accumulated_metrics);
+    thread_manager.accumulator_thread.can_run = 0;
+    thread_manager.file_write_thread.can_run = 0;
+    thread_manager.export_thread.can_run = 0;
 
-    monitor_metrics(accumulated_metrics);
+    pthread_create(&thread_manager.accumulator_thread.thread, NULL, accumulator_function, NULL);
+    pthread_create(&thread_manager.file_write_thread.thread, NULL, &file_write_function, NULL);
+    pthread_create(&thread_manager.export_thread.thread, NULL, &export_function, NULL);
 
-    close_socket(socket_list);
+    printf("Threads created!\n");
+
+    pthread_join(thread_manager.accumulator_thread.thread, NULL);
+    pthread_join(thread_manager.file_write_thread.thread, NULL);
+    pthread_join(thread_manager.export_thread.thread, NULL);
+
+    printf("Threads joined, program ends!\n");
 
     return EXIT_SUCCESS;
 }
