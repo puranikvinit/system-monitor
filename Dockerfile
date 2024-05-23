@@ -8,4 +8,6 @@ COPY . .
 
 RUN mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release && make
 
+EXPOSE 8080
+
 CMD "./build/system-monitor"
