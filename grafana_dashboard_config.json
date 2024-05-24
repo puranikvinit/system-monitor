@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "adexcj24pfxfkf"
+        "uid": "system-monitor-datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -83,7 +83,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "adexcj24pfxfkf"
+            "uid": "system-monitor-datasource"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -105,7 +105,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "adexcj24pfxfkf"
+        "uid": "system-monitor-datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -186,7 +186,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "adexcj24pfxfkf"
+            "uid": "system-monitor-datasource"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -220,7 +220,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "adexcj24pfxfkf"
+        "uid": "system-monitor-datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -282,7 +282,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "adexcj24pfxfkf"
+            "uid": "system-monitor-datasource"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -325,7 +325,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "adexcj24pfxfkf"
+          "uid": "system-monitor-datasource"
         },
         "definition": "metrics((cpu_)(.)(_usage))",
         "hide": 0,
