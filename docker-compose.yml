@@ -13,7 +13,19 @@ services:
     image: bitnami/prometheus:latest
     volumes:
       - ./prometheus_config.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
+
+  grafana-dashboard:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./grafana_dashboard_config.json:/var/lib/grafana/dashboards/default.json
+      - ./grafana_datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./grafana_dashboard_provider.yml:/etc/grafana/provisioning/dashboards/dashboard.yaml
+    depends_on:
+      - prometheus-db
