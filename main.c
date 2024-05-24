@@ -40,5 +40,10 @@ int main() {
 
     printf("Threads joined, program ends!\n");
 
+    free(thread_manager.accumulator_thread);
+    free(thread_manager.file_write_thread);
+    free(thread_manager.export_thread);
+    free(thread_manager.watchdog_thread);
+
     return EXIT_SUCCESS;
 }
