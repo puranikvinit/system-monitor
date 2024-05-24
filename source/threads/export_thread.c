@@ -43,9 +43,13 @@ void *export_function() {
         while (position > 0 && line_count < 100) {
             fseek(file, --position, SEEK_SET);
             if (fgetc(file) == '\n') {
-            line_count++;
+                line_count++;
             }
         }
+
+        // Move the file pointer behind by 1 character, as `fgetc`
+        // auto-increments the file pointer ahead by 1 character
+        fseek(file, -1, SEEK_CUR);
         
         // Read and print the last 100 lines
         char line[256];
