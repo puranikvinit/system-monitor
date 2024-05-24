@@ -12,7 +12,7 @@ void record_metrics(float *cpu_percs, size_t cpu_num, accumulator_queue_t *accum
     for (size_t i = 0; i < cpu_num; i++) {
         // printf("CPU %zu Usage: %.2f%%\n", i, cpu_percs[i]);
         char current_cpu_usage[256];
-        sprintf(current_cpu_usage, "CPU %zu Usage: %.2f%% ", i, cpu_percs[i]);
+        i == 0 ? sprintf(current_cpu_usage, "overall_cpu_usage: %.2f%% ", i, cpu_percs[i]) : sprintf(current_cpu_usage, "cpu_%zu_usage: %.2f%% ", i-1, cpu_percs[i]);
         strcat(usage_metrics, current_cpu_usage);
     }
     strcat(usage_metrics, "\n");
