@@ -11,20 +11,25 @@
 #include "socket_manager.h"
 
 void *export_function() {
-    int FAIL_EXIT = 1;
-    int SUCCESS_EXIT = 0;
+    extern int SUCCESS_EXIT;
     
     extern thread_manager_t thread_manager;
 
-    pthread_mutex_lock(&thread_manager.export_thread.mutex);
+    pthread_mutex_lock(&thread_manager.export_thread->mutex);
 
-    thread_manager.export_thread.can_run = 1;
-    while (thread_manager.export_thread.can_run) {
+    thread_manager.export_thread->can_run = 1;
+    socket_manager_t server_socket_fd = open_socket();
+    while (thread_manager.export_thread->can_run) {
         FILE *file = fopen(ACCUMULATED_METRICS_FILE, "r");
         if (file == NULL) {
-            perror("Error while opening the Accumulated Metrics file!\n");
-            pthread_mutex_unlock(&thread_manager.export_thread.mutex);
-            return (void *) &FAIL_EXIT;
+            // perror("Error while opening the Accumulated Metrics file!\n");
+            // pthread_mutex_unlock(&thread_manager.export_thread.mutex);
+            // return (void *) &FAIL_EXIT;
+            printf("Waiting for the metrics to be recorded...\n");
+
+            // TODO: ADD COMMENT TO JUSTIFY
+            usleep((useconds_t)(EXPORT_SLEEP_TIME + FILE_WRITE_SLEEP_TIME));
+            continue;
         }
         // Move the file pointer to the end of the file
         fseek(file, 0, SEEK_END);
@@ -50,12 +55,13 @@ void *export_function() {
         }
         fclose(file);
 
-        close_socket(open_socket(accumulated_metrics));
+        serve_client_request(&server_socket_fd, accumulated_metrics);
 
         usleep((useconds_t)EXPORT_SLEEP_TIME);
     }
 
-    pthread_mutex_unlock(&thread_manager.export_thread.mutex);
+    close(server_socket_fd.server_socket_fd);
+    pthread_mutex_unlock(&thread_manager.export_thread->mutex);
 
     return (void *) &SUCCESS_EXIT;
 }

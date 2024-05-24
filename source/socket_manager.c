@@ -10,8 +10,8 @@
 
 #define PORT 8080
 
-socket_manager_t open_socket(char* accumulated_metrics) {
-    int server_fd, new_socket;
+socket_manager_t open_socket() {
+    int server_fd;
 
     struct sockaddr_in address;
     int addrlen = sizeof(address);
@@ -37,20 +37,24 @@ socket_manager_t open_socket(char* accumulated_metrics) {
         perror("listen failed");
         exit(EXIT_FAILURE);
     }
-    
+
+    socket_manager_t server_socket = {server_fd, address, addrlen};
+    return server_socket;
+}
+
+void serve_client_request(socket_manager_t *server_socket, char* accumulated_metrics) {
+    int new_socket;
     // Accept incoming connection
-    if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
+    if ((new_socket = accept(server_socket->server_socket_fd, (struct sockaddr *)&server_socket->address, (socklen_t*)&server_socket->addrlen)) < 0) {
         perror("accept failed");
         exit(EXIT_FAILURE);
     }
 
     export_metrics(new_socket, accumulated_metrics);
 
-    socket_manager_t socket_manager = {server_fd, new_socket};
-    return socket_manager;
+    close(new_socket);
 }
 
-void close_socket(socket_manager_t socket_list) {
-    close(socket_list.new_socket);
-    close(socket_list.server_fd);
+void close_socket(int server_socket_fd) {
+    close(server_socket_fd);
 }
