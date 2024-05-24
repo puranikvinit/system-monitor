@@ -9,6 +9,8 @@
 #define FILE_WRITE_SLEEP_TIME 5000000 // 5s
 #define WATCHDOG_SLEEP_TIME 100000 // 100ms
 
+#define THREAD_BUFFER_TIME 100000 // 100ms
+
 
 /*! \brief Contains `pthread_t` objects and other flags required for thread execution */
 typedef struct {
@@ -19,10 +21,10 @@ typedef struct {
 
 /*! \brief Contains the thread objects for all the threads required for the application */
 typedef struct {
-    thread_obj_t accumulator_thread;
-    thread_obj_t export_thread;
-    thread_obj_t file_write_thread;
-    thread_obj_t watchdog_thread;
+    thread_obj_t *accumulator_thread;
+    thread_obj_t *export_thread;
+    thread_obj_t *file_write_thread;
+    thread_obj_t *watchdog_thread;
 } thread_manager_t;
 
 
