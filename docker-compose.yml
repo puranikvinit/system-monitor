@@ -1,11 +1,19 @@
 version: '3.9'
 
 services:
-  system-monitor:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  # system-monitor:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - /proc:/host/proc:ro
+  #   ports:
+  #     - "8080:8080"
+  prometheus-db:
+    image: bitnami/prometheus:latest
     volumes:
-      - /proc:/host/proc:ro
+      - ./prometheus_config.yml:/etc/prometheus/prometheus.yml
     ports:
-      - "8080:8080"
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
