@@ -5,7 +5,7 @@
 #include "monitor_metrics.h"
 #include "metrics_exporter.h"
 
-void monitor_metrics(stat_struct_t *current_stats, stat_struct_t *previous_stats, bool is_first_iteration, size_t stat_cpu_num, float *cpu_per_cs) {
+int monitor_metrics(stat_struct_t *current_stats, stat_struct_t *previous_stats, bool is_first_iteration, size_t stat_cpu_num, float *cpu_per_cs) {
         if (!read_proc_stat(current_stats)) {
             printf("ERROR: Failed to read /proc/stat\n");
             return EXIT_FAILURE; // Exit loop on failure
@@ -18,6 +18,8 @@ void monitor_metrics(stat_struct_t *current_stats, stat_struct_t *previous_stats
 
         // Update previous stats for the next iteration
         _copy_stats(previous_stats, current_stats, stat_cpu_num);
+
+        return EXIT_SUCCESS;
 }
 
 void _copy_stats(stat_struct_t *dest, stat_struct_t *src, size_t cpu_num) {

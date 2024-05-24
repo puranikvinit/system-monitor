@@ -8,13 +8,13 @@
 #include "thread_manager.h"
 
 void *accumulator_function() {
-    int FAIL_EXIT = 1;
-    int SUCCESS_EXIT = 0;
+    extern int FAIL_EXIT;
+    extern int SUCCESS_EXIT;
 
     extern accumulator_queue_t accumulator_queue;
     extern thread_manager_t thread_manager;
 
-    pthread_mutex_lock(&thread_manager.accumulator_thread.mutex);
+    pthread_mutex_lock(&thread_manager.accumulator_thread->mutex);
 
     size_t stat_cpu_num;
     if (!scan_proc_stat(&stat_cpu_num) || stat_cpu_num == 0) {
@@ -44,8 +44,8 @@ void *accumulator_function() {
 
     bool first_iteration = true;
 
-    thread_manager.accumulator_thread.can_run = 1;
-    while (thread_manager.accumulator_thread.can_run) {
+    thread_manager.accumulator_thread->can_run = 1;
+    while (thread_manager.accumulator_thread->can_run) {
         monitor_metrics(&current_stats, &previous_stats, first_iteration, stat_cpu_num, cpu_per_cs);
         if(!first_iteration) record_metrics(cpu_per_cs, stat_cpu_num, &accumulator_queue);
         first_iteration = false;
@@ -58,7 +58,7 @@ void *accumulator_function() {
     free(current_stats.cpu);
     free(previous_stats.cpu);
 
-    pthread_mutex_unlock(&thread_manager.accumulator_thread.mutex);
+    pthread_mutex_unlock(&thread_manager.accumulator_thread->mutex);
 
     return (void *) &SUCCESS_EXIT;
 }
