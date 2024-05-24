@@ -4,5 +4,5 @@ global:
 scrape_configs:
   - job_name: 'system-monitor'
     static_configs:
-      - targets: ['172.17.0.1:8080'] # IP address of docker0 interface for the host machine
+      - targets: ['localhost:8080']
     metrics_path: '/'
