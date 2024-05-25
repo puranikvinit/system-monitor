@@ -1,11 +1,36 @@
 version: '3.9'
 
 services:
-  system-monitor:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  # system-monitor:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - /proc:/host/proc:ro
+  #   ports:
+  #     - "8080:8080"
+  prometheus-db:
+    image: bitnami/prometheus:latest
     volumes:
-      - /proc:/host/proc:ro
-    ports:
-      - "8080:8080"
+      - ./configs/prometheus_config.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    # ports:
+    #   - "9200:9090"
+    network_mode: "host"
+
+  grafana-dashboard:
+    image: grafana/grafana:latest
+    # ports:
+      # - "4000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./configs/grafana_dashboard_config.json:/var/lib/grafana/dashboards/default.json
+      - ./configs/grafana_datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./configs/grafana_dashboard_provider.yml:/etc/grafana/provisioning/dashboards/dashboard.yaml
+    network_mode: "host"
+    
+    depends_on:
+      - prometheus-db
