@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_QUEUE_SIZE 100
+#define MAX_QUEUE_SIZE 100000
 
 typedef struct {
     char* queue[MAX_QUEUE_SIZE];
