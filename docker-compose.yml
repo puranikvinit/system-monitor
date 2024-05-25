@@ -12,7 +12,7 @@ services:
   prometheus-db:
     image: bitnami/prometheus:latest
     volumes:
-      - ./prometheus_config.yml:/etc/prometheus/prometheus.yml
+      - ./configs/prometheus_config.yml:/etc/prometheus/prometheus.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     # ports:
@@ -27,9 +27,9 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_USERS_ALLOW_SIGN_UP=false
     volumes:
-      - ./grafana_dashboard_config.json:/var/lib/grafana/dashboards/default.json
-      - ./grafana_datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
-      - ./grafana_dashboard_provider.yml:/etc/grafana/provisioning/dashboards/dashboard.yaml
+      - ./configs/grafana_dashboard_config.json:/var/lib/grafana/dashboards/default.json
+      - ./configs/grafana_datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./configs/grafana_dashboard_provider.yml:/etc/grafana/provisioning/dashboards/dashboard.yaml
     network_mode: "host"
     
     depends_on:
