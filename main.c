@@ -31,19 +31,21 @@ int main() {
     pthread_create(&thread_manager.accumulator_thread->thread, NULL, &accumulator_function, NULL);
     pthread_create(&thread_manager.file_write_thread->thread, NULL, &file_write_function, NULL);
     pthread_create(&thread_manager.export_thread->thread, NULL, &export_function, NULL);
+    pthread_create(&thread_manager.watchdog_thread->thread, NULL, &watchdog_function, NULL);
 
     printf("Threads created!\n");
 
     pthread_join(thread_manager.accumulator_thread->thread, NULL);
     pthread_join(thread_manager.file_write_thread->thread, NULL);
     pthread_join(thread_manager.export_thread-> thread, NULL);
+    pthread_join(thread_manager.watchdog_thread->thread, NULL);
 
     printf("Threads joined, program ends!\n");
 
-    free(thread_manager.accumulator_thread);
-    free(thread_manager.file_write_thread);
-    free(thread_manager.export_thread);
     free(thread_manager.watchdog_thread);
+    free(thread_manager.export_thread);
+    free(thread_manager.file_write_thread);
+    free(thread_manager.accumulator_thread);
 
     return EXIT_SUCCESS;
 }

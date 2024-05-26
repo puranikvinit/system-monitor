@@ -1,6 +1,8 @@
 #ifndef WATCHDOG_TIMER_H
 #define WATCHDOG_TIMER_H
 
+#include <stdlib.h>
+
 #include "app_timer.h"
 #include "thread_manager.h"
 
