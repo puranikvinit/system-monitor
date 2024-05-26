@@ -36,4 +36,6 @@ void *file_write_function();
 
 void *export_function();
 
+void *watchdog_function();
+
 #endif

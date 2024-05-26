@@ -2,6 +2,10 @@
 #include "thread_manager.h"
 
 void init_watchdog_timer(watchdog_timer_t *watchdog_timer) {
+    watchdog_timer->accumulator_timer = (app_timer_t *) malloc(sizeof(app_timer_t));
+    watchdog_timer->export_timer = (app_timer_t *) malloc(sizeof(app_timer_t));
+    watchdog_timer->file_write_timer = (app_timer_t *) malloc(sizeof(app_timer_t));
+
     init_timer(watchdog_timer->accumulator_timer);
     init_timer(watchdog_timer->export_timer);
     init_timer(watchdog_timer->file_write_timer);
