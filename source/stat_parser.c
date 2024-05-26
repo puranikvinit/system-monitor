@@ -68,6 +68,10 @@ bool read_proc_stat(stat_struct_t *stat) {
     }
 
     fclose(proc_stat);
+
+    free(buff);
+    free(tmp);
+    
     return true;
 }
 
