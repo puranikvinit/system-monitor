@@ -9,6 +9,8 @@
 #include "accumulator_queue.h"
 #include "watchdog_timer.h"
 
+#include "signal_handler.h"
+
 accumulator_queue_t accumulator_queue = { .front = 0, .rear = 0 };
 
 thread_manager_t thread_manager;
@@ -18,6 +20,8 @@ int FAIL_EXIT = 1;
 int SUCCESS_EXIT = 0;
 
 int main() {
+    signal(SIGINT, handle_signal);
+    
     thread_manager.accumulator_thread = malloc(sizeof(thread_obj_t));
     thread_manager.file_write_thread = malloc(sizeof(thread_obj_t));
     thread_manager.export_thread = malloc(sizeof(thread_obj_t));
