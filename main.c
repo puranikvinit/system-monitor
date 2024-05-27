@@ -32,6 +32,13 @@ int main() {
     thread_manager.export_thread->can_run = 0;
     thread_manager.watchdog_thread->can_run = 0;
 
+    init_watchdog_timer(&watchdog_timer);
+
+    pthread_mutex_init(&thread_manager.accumulator_thread->mutex, NULL);
+    pthread_mutex_init(&thread_manager.file_write_thread->mutex, NULL);
+    pthread_mutex_init(&thread_manager.export_thread->mutex, NULL);
+    pthread_mutex_init(&thread_manager.watchdog_thread->mutex, NULL);
+
     pthread_create(&thread_manager.accumulator_thread->thread, NULL, &accumulator_function, NULL);
     pthread_create(&thread_manager.file_write_thread->thread, NULL, &file_write_function, NULL);
     pthread_create(&thread_manager.export_thread->thread, NULL, &export_function, NULL);

@@ -39,7 +39,9 @@ void write_metrics(accumulator_queue_t *accumulator_queue) {
     } else {
         // fprintf(accumulated_metrics, "%s", usage_metrics);
         while (!isEmpty(accumulator_queue)) {
-            fprintf(accumulated_metrics, "%s", dequeue(accumulator_queue));
+            char *dequeued_metrics = dequeue(accumulator_queue);
+            fprintf(accumulated_metrics, "%s", dequeued_metrics);
+            free(dequeued_metrics);
         }
         fclose(accumulated_metrics);
     }

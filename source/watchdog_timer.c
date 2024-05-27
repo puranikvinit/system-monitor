@@ -12,9 +12,18 @@ void init_watchdog_timer(watchdog_timer_t *watchdog_timer) {
 }
 
 int check_if_time_exceeded(watchdog_timer_t *watchdog_timer, thread_manager_t *thread_manager) {
-    if(watchdog_timer->accumulator_timer->is_enabled && watchdog_timer->accumulator_timer->start_time >= (ACCUMULATOR_SLEEP_TIME/1000 + THREAD_BUFFER_TIME/1000) && thread_manager->accumulator_thread->can_run) return ACCUMULATOR_THREAD;
-    if(watchdog_timer->file_write_timer->is_enabled && watchdog_timer->file_write_timer->start_time >= (FILE_WRITE_SLEEP_TIME/1000 + THREAD_BUFFER_TIME/1000) && thread_manager->file_write_thread->can_run) return FILE_WRITE_THREAD;
-    if(watchdog_timer->export_timer->is_enabled && watchdog_timer->export_timer->start_time >= (EXPORT_SLEEP_TIME/1000 + THREAD_BUFFER_TIME/1000) && thread_manager->export_thread->can_run) return EXPORT_THREAD;
+    if(watchdog_timer->accumulator_timer->is_enabled && get_passed_time(watchdog_timer->accumulator_timer) >= (ACCUMULATOR_SLEEP_TIME/1000 + THREAD_BUFFER_TIME/1000) && thread_manager->accumulator_thread->can_run) {
+        printf("Accumulator: %d %d %d\n",watchdog_timer->accumulator_timer->is_enabled, get_passed_time(watchdog_timer->accumulator_timer) >= (ACCUMULATOR_SLEEP_TIME/1000 + THREAD_BUFFER_TIME/1000), thread_manager->accumulator_thread->can_run);
+        return ACCUMULATOR_THREAD;
+    }
+    if(watchdog_timer->file_write_timer->is_enabled && get_passed_time(watchdog_timer->file_write_timer) >= (FILE_WRITE_SLEEP_TIME/1000 + THREAD_BUFFER_TIME/1000) && thread_manager->file_write_thread->can_run) {
+        printf("File Write: %d %d %d\n",watchdog_timer->file_write_timer->is_enabled, get_passed_time(watchdog_timer->file_write_timer) >= (FILE_WRITE_SLEEP_TIME/1000 + THREAD_BUFFER_TIME/1000), thread_manager->file_write_thread->can_run);
+        return FILE_WRITE_THREAD;
+    }
+    // if(watchdog_timer->export_timer->is_enabled && (get_current_time() - watchdog_timer->export_timer->start_time) >= (EXPORT_SLEEP_TIME/1000 + THREAD_BUFFER_TIME/1000) && thread_manager->export_thread->can_run) {
+    //     printf("Export: %d %d %d\n",watchdog_timer->export_timer->is_enabled, (get_current_time() - watchdog_timer->export_timer->start_time) >= (EXPORT_SLEEP_TIME/1000 + THREAD_BUFFER_TIME/1000), thread_manager->export_thread->can_run);
+    //     return EXPORT_THREAD;
+    // }
     
     return -1;
 }

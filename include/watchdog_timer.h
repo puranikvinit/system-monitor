@@ -2,6 +2,7 @@
 #define WATCHDOG_TIMER_H
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "app_timer.h"
 #include "thread_manager.h"
