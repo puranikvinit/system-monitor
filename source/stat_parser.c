@@ -70,7 +70,7 @@ bool read_proc_stat(stat_struct_t *stat) {
     return true;
 }
 
-void print_proc_stat(stat_struct_t *stat) {
+void _print_proc_stat(stat_struct_t *stat) {
     for (size_t i = 0; i < stat->cpu_num; ++i) {
         printf("CPU%lu: %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu \n", i, stat->cpu[i].user, stat->cpu[i].nice, stat->cpu[i].system, stat->cpu[i].idle, stat->cpu[i].io_wait, stat->cpu[i].irq, stat->cpu[i].soft_irq, stat->cpu[i].steal, stat->cpu[i].guest, stat->cpu[i].guest_nice);
     }

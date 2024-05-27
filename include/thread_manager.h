@@ -10,6 +10,7 @@
 #define FILE_WRITE_SLEEP_TIME 5000000 // 5s
 #define WATCHDOG_SLEEP_TIME 100000 // 100ms
 
+// Additional buffer time to allow completion of clean up operations
 #define THREAD_BUFFER_TIME 100000 // 100ms
 
 
@@ -31,12 +32,16 @@ typedef struct {
 
 // Member APIs
 
+/*! \brief Thread function for the accumulator thread */
 void *accumulator_function();
 
+/*! \brief Thread function for the file write thread */
 void *file_write_function();
 
+/*! \brief Thread function for the export thread */
 void *export_function();
 
+/*! \brief Thread function for the watchdog timer thread */
 void *watchdog_function();
 
 #endif

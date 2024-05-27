@@ -23,7 +23,7 @@ void *export_function() {
             // return (void *) &FAIL_EXIT;
             printf("Waiting for the metrics to be recorded...\n");
 
-            // TODO: ADD COMMENT TO JUSTIFY
+            // Sleep until the file write thread function completes one loop, hence also creating the file.
             usleep((useconds_t)(EXPORT_SLEEP_TIME + FILE_WRITE_SLEEP_TIME));
             continue;
         }

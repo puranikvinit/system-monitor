@@ -53,13 +53,15 @@ typedef struct {
 
 // Member APIs
 
-/*! \brief Scans the contents of `/proc/stat` to determine number of CPUs*/
+/*! \brief Scans the contents of `/proc/stat` to determine number of CPUs 
+    \return `true` if successfully calculated number of CPU cores, else `false` */
 bool scan_proc_stat(size_t *cpu_num);
 
-/*! \brief Reads the most important contents of the `/proc/stat` file*/
+/*! \brief Reads the most important contents of the `/proc/stat` file
+    \return `true` if successfully scraped metrics from `/proc/stat`, else `false` */
 bool read_proc_stat(stat_struct_t *stat);
 
-/*! \brief Prints the contents of `stat_struct_t` to the terminal, for debugging*/
-void print_proc_stat(stat_struct_t *stat);
+/*! \brief internal API; prints the contents of `stat_struct_t` to the terminal, for debugging */
+void _print_proc_stat(stat_struct_t *stat);
 
 #endif

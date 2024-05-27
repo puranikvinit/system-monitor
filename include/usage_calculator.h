@@ -11,8 +11,8 @@
  *  \returns usage in percentage */
 float calculate_cpu_use_per_c(cpu_struct_t prev_cpu, cpu_struct_t cur_cpu);
 
-/*! \brief calculates CPU usage of all CPUs in `/proc/stat`; puts it on the logQueue
-    \returns false if the cpuN changes between two consecutive reads */
+/*! \brief calculates CPU usage of all CPU cores in `/proc/stat`
+    \returns `false` if the cpuN changes between two consecutive reads, else `true` */
 bool calculate_all_cpus(stat_struct_t *prev_stat, stat_struct_t *cur_stat, size_t cpu_num, float *cpu_per_cs);
 
 #endif
