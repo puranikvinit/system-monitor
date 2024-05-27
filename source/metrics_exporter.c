@@ -1,9 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <time.h>
-
 #include "metrics_exporter.h"
 #include "accumulator_queue.h"
 

@@ -1,10 +1,6 @@
 // Works independently of the accumulator and file write threads
 
 // Read from file -> store in buffer -> open socket -> send HTTP response with `export_metrics`
-#include <stdio.h>
-#include <pthread.h>
-#include <string.h>
-#include <unistd.h>
 
 #include "thread_manager.h"
 #include "metrics_exporter.h"
@@ -27,7 +23,7 @@ void *export_function() {
             // return (void *) &FAIL_EXIT;
             printf("Waiting for the metrics to be recorded...\n");
 
-            // TODO: ADD COMMENT TO JUSTIFY
+            // Sleep until the file write thread function completes one loop, hence also creating the file.
             usleep((useconds_t)(EXPORT_SLEEP_TIME + FILE_WRITE_SLEEP_TIME));
             continue;
         }
