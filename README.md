@@ -18,6 +18,10 @@ As of now, only supported for *NIX systems with a `/proc` fs.
 ```bash
 chmod +x ./system-monitor
 ```
+- Launch the application by executing the binary:
+```bash
+./system-monitor
+```
 This opens up port 8080 on the host machine, and emits the scraped metrics, updated every 5s, in the OpenMetrics Standard. The scraped metrics are also written into a file named `accumulated_metrics.txt` in the same directory where the binary is downloaded.
 - For getting the metrics on a grafana dashboard, execute the following commands in the main project directory:
 ```bash
