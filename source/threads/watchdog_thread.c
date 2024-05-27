@@ -1,6 +1,4 @@
 // Implement watchdog timer
-#include <unistd.h>
-#include <stdio.h>
 
 #include "watchdog_timer.h"
 #include "thread_manager.h"

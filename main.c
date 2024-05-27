@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-
 #include "thread_manager.h"
 #include "socket_manager.h"
 #include "monitor_metrics.h"

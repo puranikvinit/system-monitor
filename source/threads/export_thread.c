@@ -1,10 +1,6 @@
 // Works independently of the accumulator and file write threads
 
 // Read from file -> store in buffer -> open socket -> send HTTP response with `export_metrics`
-#include <stdio.h>
-#include <pthread.h>
-#include <string.h>
-#include <unistd.h>
 
 #include "thread_manager.h"
 #include "metrics_exporter.h"

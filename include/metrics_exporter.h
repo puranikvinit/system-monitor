@@ -1,6 +1,12 @@
 #ifndef METRICS_EXPORTER_H
 #define METRICS_EXPORTER_H
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <time.h>
+
 #include "accumulator_queue.h"
 
 #define ACCUMULATED_METRICS_FILE "./accumulated_metrics.txt"

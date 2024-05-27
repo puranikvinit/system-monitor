@@ -1,5 +1,3 @@
-#include <stdlib.h>
-
 #include "stat_parser.h"
 
 #define BUFF_SIZE 20

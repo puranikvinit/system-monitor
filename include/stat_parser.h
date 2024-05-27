@@ -1,6 +1,7 @@
 #ifndef STAT_STRUCT_H
 #define STAT_STRUCT_H
 
+#include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>

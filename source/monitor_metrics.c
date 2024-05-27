@@ -1,6 +1,3 @@
-#include <stdlib.h>
-#include <unistd.h>
-
 #include "usage_calculator.h"
 #include "monitor_metrics.h"
 #include "metrics_exporter.h"

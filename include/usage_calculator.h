@@ -1,6 +1,8 @@
 #ifndef CPU_ANALYSER_H
 #define CPU_ANALYSER_H
 
+#include <stdlib.h>
+
 #include "stat_parser.h"
 
 // Member APIs

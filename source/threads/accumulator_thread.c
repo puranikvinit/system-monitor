@@ -1,6 +1,4 @@
 // Monitor metrics -> record_metrics (push to accumulator queue)
-#include <pthread.h>
-#include <unistd.h>
 
 #include "accumulator_queue.h"
 #include "monitor_metrics.h"

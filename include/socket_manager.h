@@ -1,8 +1,12 @@
 #ifndef SOCKET_MANAGER_H
 #define SOCKET_MANAGER_H
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <unistd.h>
 
 typedef struct {
     int server_socket_fd;

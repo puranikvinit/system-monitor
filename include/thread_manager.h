@@ -2,6 +2,7 @@
 #define MONITOR_THREADS_H
 
 #include <pthread.h>
+#include <unistd.h>
 
 // Define the Sleep Times for each thread (in us)
 #define ACCUMULATOR_SLEEP_TIME 5000000 // 5s

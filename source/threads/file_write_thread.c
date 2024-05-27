@@ -1,6 +1,4 @@
 // Pop from accumulator queue -> write to file
-#include <pthread.h>
-#include <unistd.h>
 
 #include "accumulator_queue.h"
 #include "thread_manager.h"

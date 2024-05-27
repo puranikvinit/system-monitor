@@ -1,5 +1,3 @@
-#include <stdlib.h>
-
 #include "usage_calculator.h"
 
 float calculate_cpu_use_per_c(cpu_struct_t prev_cpu, cpu_struct_t curr_cpu) {
