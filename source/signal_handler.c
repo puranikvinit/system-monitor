@@ -6,7 +6,12 @@ void handle_signal(int signal) {
 
     switch (signal) {
         case SIGINT:
+            thread_manager.accumulator_thread->can_run = 0;
+            thread_manager.file_write_thread->can_run = 0;
+            thread_manager.export_thread->can_run = 0;
+            
             kill_thread(thread_manager.watchdog_thread);
+            pthread_cancel(thread_manager.export_thread->thread);
             break;
 
         default:

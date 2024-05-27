@@ -1,5 +1,6 @@
 // Implement watchdog timer
 #include <unistd.h>
+#include <stdio.h>
 
 #include "watchdog_timer.h"
 #include "thread_manager.h"
@@ -10,8 +11,6 @@ void *watchdog_function() {
     extern watchdog_timer_t watchdog_timer;
     extern thread_manager_t thread_manager;
 
-    init_watchdog_timer(&watchdog_timer);
-
     pthread_mutex_lock(&thread_manager.watchdog_thread->mutex);
 
     thread_manager.watchdog_thread->can_run = 1;
@@ -21,6 +20,8 @@ void *watchdog_function() {
             pthread_cancel(thread_manager.accumulator_thread->thread);
             pthread_cancel(thread_manager.file_write_thread->thread);
             pthread_cancel(thread_manager.export_thread->thread);
+            printf("Thread %d exceeded time, exiting...\n", exceeded_thread);
+            break;
         }
         
         usleep((useconds_t)WATCHDOG_SLEEP_TIME);
