@@ -38,8 +38,8 @@ bool scan_proc_stat(size_t *cpu_num) {
 }
 
 bool read_proc_stat(stat_struct_t *stat) {
-    char *buff = calloc(BUFF_SIZE, sizeof(char));
-    char *tmp = calloc(TMP_SIZE, sizeof(char));
+    char buff[BUFF_SIZE];
+    char tmp[TMP_SIZE];
     tmp[TMP_SIZE - 1] = '\0';
     FILE *proc_stat = NULL;
 
@@ -68,9 +68,6 @@ bool read_proc_stat(stat_struct_t *stat) {
     }
 
     fclose(proc_stat);
-
-    free(buff);
-    free(tmp);
     
     return true;
 }
